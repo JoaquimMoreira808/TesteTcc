@@ -14,8 +14,4 @@ def CadastrarAlunos(nome:str, matricula:int,orientador:str):
     print(f"Professor {nome} cadastrado com sucesso!")
 
 
-CadastrarAlunos("Lucas", 12345, "Camila")
-CadastrarAlunos("Isabela", 54321, "Joaquim")
-
-
 
