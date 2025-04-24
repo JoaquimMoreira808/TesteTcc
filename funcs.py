@@ -1,17 +1,34 @@
-Professores = []
+professores = []
 
-def cadastrar_professor(nome:str):
-    Professor = {"nome":nome, "alunos": []}
-    Professores.append(Professor)
+def cadastrar_orientador(nome: str):
+    professor = {"nome": nome, "alunos": []}
+    professores.append(professor)
     print(f"Professor {nome} cadastrado com sucesso!")
 
-cadastrar_professor("Joaquim")
+alunos = []
 
-Alunos = []
-def CadastrarAlunos(nome:str, matricula:int,orientador:str):
-    Aluno = {"nome":nome, "matricula":matricula, "orientador":orientador, "entregas": []}
-    Alunos.append(Aluno)
-    print(f"Professor {nome} cadastrado com sucesso!")
+def cadastrar_aluno(nome: str, matricula: int, orientador: str):
+    aluno = {"nome": nome, "matricula": matricula, "orientador": orientador, "entregas": []}
+    alunos.append(aluno)
+    print(f"Aluno {nome} cadastrado com sucesso!")
 
+def menu():
+    print("""
+=============================
+    MENU DE CADASTROS
+=============================
+[1] Cadastrar Orientador
+[2] Cadastrar Aluno
+=============================
+""")
 
+    opcao = input("Opção: ")
 
+    if opcao == "1":
+        nome = input("Informe o nome do orientador: ")
+        cadastrar_orientador(nome)
+    
+    else:
+        print("Opção inválida.")
+
+menu()
