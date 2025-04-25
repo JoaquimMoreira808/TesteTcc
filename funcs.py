@@ -1,34 +1,45 @@
-Orientadores = []
+#================================================================================================
+
+Orientadores = [] # Array pra armazenar professores(Dicts)
+Alunos = [] # Array pra armazenar alunos(Dicts)
+
+#================================================================================================
 
 def cadastrar_orientador(nome: str):
     Orientador = {"nome": nome, "alunos": []}
     Orientadores.append(Orientador)
     print(f"Orientador {nome} cadastrado com sucesso!")
 
-alunos = []
+#================================================================================================
 
 def cadastrar_aluno(nome: str, matricula: int, orientador: str):
     aluno = {"nome": nome, "matricula": matricula, "orientador": orientador, "entregas": []}
-    alunos.append(aluno)
+    Alunos.append(aluno)
     print(f"Aluno {nome} cadastrado com sucesso!")
+
+#================================================================================================
 
 def listar_orientadores():
     print("Lista de orientadores:")
-    for o in Orientadores:
-        print(f"- {o['nome']} (Alunos: {len(o['alunos'])})")
+    for orientador in Orientadores:
+        print(f"- {orientador['nome']} (Alunos: {len(orientador['alunos'])})")
+
+#================================================================================================
 
 def listar_orientador(nome: str):
-    for o in Orientadores:
-        if o["nome"] == nome:
-            print(f"Orientador: {o['nome']}")
-            if o["alunos"]:
+    for orientador in Orientadores:
+        if orientador["nome"] == nome:
+            print(f"Orientador: {orientador['nome']}")
+            if orientador["alunos"]:
                 print("Alunos orientados:")
-                for aluno in o["alunos"]:
+                for aluno in orientador["alunos"]:
                     print(f"  - {aluno['nome']} (Matrícula: {aluno['matricula']})")
             else:
                 print("Nenhum aluno cadastrado ainda.")
             return
     print(f"Orientador '{nome}' não encontrado.")
+
+#================================================================================================
 
 cadastrar_orientador("Marcelo")
 cadastrar_orientador("Camila")
@@ -40,69 +51,16 @@ cadastrar_aluno("Fernando", 67890, "Marcelo")
 cadastrar_aluno("Ana", 99999, "Rosangela")
 cadastrar_aluno("Rodrigo", 88888, "Camila")
 
-print()
-listar_orientadores()
-print()
-
-def menu():
-    print("""
-=============================
-    MENU DE CADASTROS
-=============================
-[1] Cadastrar Orientador
-[2] Cadastrar Aluno
-=============================
-""")
-
-    opcao = input("Opção: ")
-
-    if opcao == "1":
-        nome = input("Informe o nome do orientador: ")
-        cadastrar_orientador(nome)
-    
-    else:
-        print("Opção inválida.")
-
-menu()
-
-#parte feita em sala na quarta feira
-Orientadores = []
-
-def CadastrarOrientador():
-    nome = input("Digite o nome do Ronaldo: ")
-    Orientador = {"nome":nome, "Alunos": []}
-
-
-
-Alunos = []
-def CadastrarAlunos():
-    nome = input("Digite o nome do aluno: ")
-    matricula = int(input("Digite a matricula do aluno:"))
-    orientador = input("Digite o nome do orientador: ")
-
-    Aluno = {"nome":nome, "matricula":matricula, "orientador":orientador, "entregas": []}
-    Alunos.append(Aluno)
-    print(f"Aluno {nome} cadastrado com sucesso!")
+#================================================================================================
 
 # Buscar Aluno
 def BuscarAluno(matricula):
     for aluno in Alunos:
-        if aluno["matricula"] == matricula:
+        if aluno["matricula"]:
             return aluno
     return None
 
-
-CadastrarAlunos()
-
-matricula_busca = int(input("Digite a matricula do aluno para buscar: "))
-aluno_encontrado = BuscarAluno(matricula_busca)
-
-if aluno_encontrado:
-    print(f"Aluno encontrado: {aluno_encontrado}")
-else:
-    print("Aluno não encontrado:")
-
-
+#================================================================================================
 
 # Registrar Entrega de versão do TCC
 def registrar_entrega():
@@ -125,10 +83,32 @@ def registrar_entrega():
 
     registrar_entrega()
 
-
+#================================================================================================
     
-# Atribuição de notas
 def atribuir_nota(nota:float, matricula:int):
     matricula = input("Digite a matricula do aluno: ")
-    aluno = next((a for a in Alunos if a ["matricula"] == matricula), None)
+    aluno = next((aluno for aluno in Alunos if aluno ["matricula"] == matricula), None)
     nota = input("Digite a nota do aluno: ")
+
+#================================================================================================
+
+def menu():
+    print("""
+=============================
+    MENU DE CADASTROS
+=============================
+[1] Cadastrar Orientador
+[2] Cadastrar Aluno
+=============================
+""")
+
+    opcao = input("Opção: ")
+
+    if opcao == "1":
+        nome = input("Informe o nome do orientador: ")
+        cadastrar_orientador(nome)
+    
+    else:
+        print("Opção inválida.")
+
+#================================================================================================
