@@ -64,3 +64,71 @@ def menu():
         print("Opção inválida.")
 
 menu()
+
+#parte feita em sala na quarta feira
+Orientadores = []
+
+def CadastrarOrientador():
+    nome = input("Digite o nome do Ronaldo: ")
+    Orientador = {"nome":nome, "Alunos": []}
+
+
+
+Alunos = []
+def CadastrarAlunos():
+    nome = input("Digite o nome do aluno: ")
+    matricula = int(input("Digite a matricula do aluno:"))
+    orientador = input("Digite o nome do orientador: ")
+
+    Aluno = {"nome":nome, "matricula":matricula, "orientador":orientador, "entregas": []}
+    Alunos.append(Aluno)
+    print(f"Aluno {nome} cadastrado com sucesso!")
+
+# Buscar Aluno
+def BuscarAluno(matricula):
+    for aluno in Alunos:
+        if aluno["matricula"] == matricula:
+            return aluno
+    return None
+
+
+CadastrarAlunos()
+
+matricula_busca = int(input("Digite a matricula do aluno para buscar: "))
+aluno_encontrado = BuscarAluno(matricula_busca)
+
+if aluno_encontrado:
+    print(f"Aluno encontrado: {aluno_encontrado}")
+else:
+    print("Aluno não encontrado:")
+
+
+
+# Registrar Entrega de versão do TCC
+def registrar_entrega():
+    matricula = input("Digite a matricula do aluno: ")
+    aluno = next((a for a in Alunos if a ["matricula"] == matricula), None)
+
+    if not aluno:
+        print("aluno não encontrado")
+        return
+    
+    if any(entrega[2] is None for entrega in aluno["entregas"]):
+        print("Você tem uma versão pendente de avaliação e não pode registrar uma nova entrega.")
+        return
+    
+    versao = int(input("Digite o número da versão do TCC: "))
+    data = input("Digite a data de entrega (formato YYYY-MM-DD): ")
+
+    aluno["entregas"].append((versao, data, None))
+    print(f"Versão {versao} do TCC registrada com sucesso.")
+
+    registrar_entrega()
+
+
+    
+# Atribuição de notas
+def atribuir_nota(nota:float, matricula:int):
+    matricula = input("Digite a matricula do aluno: ")
+    aluno = next((a for a in Alunos if a ["matricula"] == matricula), None)
+    nota = input("Digite a nota do aluno: ")
